@@ -1,0 +1,35 @@
+stages:          # List of stages for jobs, and their order of execution
+  - build
+  - test
+  - deploy
+
+Build:       
+  stage: build
+  environment:
+    name: Development
+  script:
+    - echo "Compiling the code..."
+    - mvn clean
+    - mvn compile
+    - mvn package
+    - echo "Compile complete."
+  artifacts:
+    paths:
+      - target/*.jar
+
+Test:   
+  stage: test    
+  environment:
+    name: Test
+  script:
+    - echo "Running unit tests... "
+    - mvn test
+    - echo "Test completed"
+
+Deploy:     
+  stage: deploy  
+  environment:
+    name: Production
+  script:
+    - echo "Deploying application..."
+    - echo "Application successfully deployed."

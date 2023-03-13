@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	
+	<head>
+	    <title>Pet Assist|My Pets </title>
+	</head>
+	<body>
+	<div class="row" style="text-align:center;background-color:powderblue;">
+		<div class="col-sm-2"><h4><a th:href="@{/home/{userId}(userId = ${userId})}">Home</a></h4></div>
+	    <div class="col-sm-8"style="text-align:center;"><h4>Track your applications <input type="hidden"th:value="${userId}"/></h4></div>
+	    <div class="col-sm-2" style="text-align:right;"><h4><a th:href="@{/logout}">Log Out</a></h4></div>
+	</div>
+	<div class = "container">
+		<div class ="row">
+			<div class="col-sm-8" style="text-align:left;"><h3>Your submitted applications</h3></div>
+		</div>
+		<hr>
+		<table class="table table-bordered table-striped">
+	        <thead>
+	        <tr>
+	            <th>Animal</th>
+	            <th>Breed</th>
+	            <th>Contact</th>
+	            <th>Address</th>
+	            <th>Reason</th>
+	        </tr>
+	        </thead>
+	        <tbody>
+	        <tr th:each="adoptionList: ${adoptionList}">
+	            <td th:text=${adoptionList.animal} />
+	            <td th:text=${adoptionList.breed} />
+	            <td th:text=${adoptionList.contact} />
+	            <td th:text=${adoptionList.address} />
+	            <td th:text=${adoptionList.reason} />
+	            <th><a th:href="@{/trackapplications/{userId}/deleteadoption/{id}(userId = ${userId}, id = ${adoptionList.id})}">Delete</a></th>
+	        </tr>
+	        </tbody>
+	    </table>
+	</div>
+	</body>
+</html>

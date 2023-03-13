@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+<head>
+    <title>Pet Assist|Place Order </title>
+</head>
+<body>
+<div class="row" style="text-align:center;background-color:powderblue;">
+    <div class="col-sm-2"><h4><a th:href="@{/home/{userId}(userId = ${userId})}">Home</a></h4></div>
+    <div class="col-sm-8" style="text-align:center;"><h4>Place Order
+    </h4></div>
+    <div class="col-sm-2" style="text-align:right;"><h4><a th:href="@{/logout}">Log Out</a></h4></div>
+
+</div>
+<hr>
+
+<div class="container">
+    <div class="col-sm-6">
+        <h4>Order Information </h4>
+        <table class="table table-bordered table-striped" style="width:100%">
+            <tbody>
+            <tr>
+                <td><strong>Category </strong></td>
+                <td th:text=${petItem.category}/>
+            </tr>
+            <tr>
+                <td><strong>Item Name </strong></td>
+                <td th:text=${petItem.itemName}/>
+            </tr>
+            <tr>
+                <td><strong>Brand </strong></td>
+                <td th:text=${petItem.brand}/>
+            </tr>
+            <tr>
+                <td><strong>Animals </strong></td>
+                <td th:text=${petItem.animals}/>
+            </tr>
+            <tr>
+                <td><strong>Item Description</strong></td>
+                <td th:text=${petItem.itemDescription}/>
+            </tr>
+            <tr>
+                <td><strong>Item Weight</strong></td>
+                <td th:text=${petItem.itemWeight}/>
+            </tr>
+            <tr>
+                <td><strong>Cost</strong></td>
+                <td th:text=${petItem.cost}/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-6">
+        <h4>Please fill the order form </h4>
+        <form th:action="@{/place-order}" style="align:center" th:object="${placeOrderForm}" method="post">
+
+            <div class="container col-sm-6">
+                <label for="name">Name: </label><br>
+                <input type="text" id="name" th:value=${name} autofocus="autofocus"/><br><br>
+                <label for="emailId">Email Id: </label><br>
+                <input type="text" id="emailId" name="emailId" th:value=${email} autofocus="autofocus"/><br><br>
+                <label for="userContact">Contact: </label><br>
+                <input type="tel" id="userContact" name="userContact" field="*{userContact}" pattern="[0-9]{10}"
+                       autofocus="autofocus" required/><br><br>
+                <label for="address">Address: </label><br>
+                <input type="text" id="address" name="address" field="*{address}" autofocus="autofocus"
+                       required/><br><br>
+                <label for="zipCode">ZipCode: </label><br>
+                <input type="text" id="zipCode" name="zipCode" field="*{zipCode}" autofocus="autofocus"
+                       required/><br><br>
+                <label for="itemQuantity">Quantity: </label><br>
+                <input type="number" id="itemQuantity" name="itemQuantity" field="*{itemQuantity}" autofocus="autofocus"
+                       onchange="getCost()"
+                       required/><br><br>
+                <label for="totalCost">Total Cost(CAD): </label><br>
+                <input type="text" id="totalCost" name="totalCost" field="*{totalCost}" autofocus="autofocus" disabled
+                       required/><br><br>
+                <input type="hidden" id="itemId" name="itemId" th:value=${petItem.itemId} autofocus="autofocus"/>
+                <input type="hidden" id="userId" name="userId" th:value=${userId} autofocus="autofocus" required/>
+                <input type="submit" value="Submit" style="width: 180px;"/>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+	    function getCost() {
+	        var quantity = document.getElementById("itemQuantity").value;
+	        var calculated_cost = [(${petItem.cost})] * quantity ;
+	        document.getElementById("totalCost").value = calculated_cost;
+	    }
+
+</script>

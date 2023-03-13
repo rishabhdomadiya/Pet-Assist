@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	    function clearSearch() {
+	        window.location = "[[@{/store/{userId}(userId = ${userId})}]]";
+	    }
+	</script>
+	<head>
+	    <title>Pet Assist|Stores </title>
+	</head>
+	<body>
+		<div class="row" style="text-align:center;background-color:powderblue;">
+
+			<div class="col-sm-2"><h4><a th:href="@{/home/{userId}(userId = ${userId})}">Home</a></h4></div>
+			<div class="col-sm-8"style="text-align:center;"><h4>Welcome to Pet Assist</h4></div>
+
+			<div class="col-sm-2" style="text-align:right;"><h4><a th:href="@{/logout}">Log Out</a></h4></div>
+		</div>
+		<div class="container" style="text-align:center;">
+			<h4>Find stores near you</h4>
+			<form th:action="@{/store/{userId}(userId = ${userId})}" method ="get">
+				<input type="button" value="See all Locations" id="btnClear" onclick="clearSearch()" /><br><br>
+	            <input type="text" name="locationName" id="locationName" size="25" th:value="${locationName}"/>
+	   			<input type="submit" value="Search" />
+	   			
+			</form>
+			<p th:if="${error}" class="error">There are no stores available near your searched location. Please try another location.</p>
+			<hr>
+			<table class="table table-bordered table-striped">
+				<tbody>
+					<tr th:each="storeModel: ${storeModel}">
+						<td style="width:200px;"> <h4 th:text=${storeModel.storeName}></h4> </td>
+						<td style="text-align:left;"> <b>Services:</b> <h5 th:text = ${storeModel.Services}></h5><br>
+							<b>Timings:</b> <h5 th:text = ${storeModel.timings}></h5><br>
+							<b>Location:</b> <h5 th:text = "${storeModel.location} +','+ ${storeModel.state} +','+ ${storeModel.pincode}"></h5>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>

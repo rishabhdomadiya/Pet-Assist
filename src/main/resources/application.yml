@@ -1,0 +1,8 @@
+url: jdbc:mysql://db-5308.cs.dal.ca:3306/CSCI5308_13_DEVINT
+user1: CSCI5308_13_DEVINT_USER
+passwordDb: ir8coo6AiKeereiw
+
+  
+url_test1: jdbc:mysql://db-5308.cs.dal.ca:3306/CSCI5308_13_DEVINT
+user_test1: CSCI5308_13_DEVINT_USER
+passwordDb_test1: ir8coo6AiKeereiw

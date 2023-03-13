@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	    function clearSearch() {
+	        window.location = "[[@{/viewpets/{userId}(userId = ${userId})}]]";
+	    }
+	</script>
+	<head>
+	    <title>Pet Assist|Adopt a pet </title>
+	</head>
+	<body>
+		<div class="row" style="text-align:center;background-color:powderblue;">
+			<div class="col-sm-2"><h4><a th:href="@{/home/{userId}(userId = ${userId})}">Home</a></h4></div>
+			<div class="col-sm-8"style="text-align:center;"><h4>Pets for adoption <input type="hidden"th:value="${userId}"/></h4></div>
+			<div class="col-sm-2" style="text-align:right;"><h4><a th:href="@{/logout}">Log Out</a></h4></div>
+		</div>
+		<div class="container" style="text-align:center;">
+			<div class="row">
+				<div class="col-sm-8" style="text-align:left;"><h3>List Pets</h3></div>
+				<div class="col-sm-4">
+					<form th:action="@{/viewpets/{userId}(userId = ${userId})}" method ="get">
+						<label for="location">Search Animals:</label><br>
+		                <!-- <select>
+		                	<option value="0" disabled>select animal</option>
+		                    <option th:each="animalList: ${animalList}" th:value="${animalList.animal}"th:text="${animalList.animal}"/>
+		                </select> -->
+		                <input type="text" name="animalName" id="animalName" size="25" th:value="${animalName}"/>
+		    			<input type="submit" value="Search" />
+		    			<input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+					</form>
+	            </div>
+			</div>
+			<p th:if="${error}" class="error">There are no matching animal with your Search. Please search another animal.</p>
+			<hr>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>Animal</th>
+						<th>Breed</th>
+						<th>Adopt a pet</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="petList: ${petList}">
+						<td th:text=${petList.animal} />
+						<td th:text=${petList.breed} />
+						<td><a th:href="@{/viewpets/{userId}/adoptapet/{id}(userId = ${userId}, id = ${petList.id})}">Adopt</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>

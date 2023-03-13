@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	function clearSearch() {
+		window.location = "[[@{/viewpets/{userId}(userId = ${userId})}]]";
+	}
+</script>
+
+<head>
+	<title>Pet Assist| Manage Orders</title>
+</head>
+
+<body>
+	<div class="row" style="text-align:center;background-color:powderblue;">
+	<div class="col-sm-2"><h4><a th:href="@{/home/{userId}(userId = ${userId})}">Home</a></h4></div>
+		<div class="col-sm-8" style="text-align:center;">
+			<h4>Manage Orders : <span th:text="${userRole}" /></h4>
+		</div>
+		<div class="col-sm-2" style="text-align:right;">
+			<h4><a th:href="@{/logout}">Log Out</a></h4>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<h3>Manage Orders : <span th:text="${userRole}" /></h3>
+			</div>
+
+		</div>
+		<hr>
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>AWB Number</th>
+					<th>Item ID</th>
+					<th th:if="'Admin User' == ${userRole}" >User Id</th>
+					<th>Item Name</th>
+					<th>Quantity</th>
+					<th>Description</th>
+					<th>Weight</th>
+					<th>User Contact</th>
+					<th>Delivery Address</th>
+					<th>Zip Code</th>
+					<th>Total Cost</th>
+					<th>Order Status</th>
+					<th  th:if="'Admin User' == ${userRole}">Edit Order</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="order: ${orders}">
+					<td th:text=${order.aWBNumber} />
+
+					<td th:text=${order.itemId} />
+					<td th:if="'Admin User' == ${userRole}" th:text=${order.userId} />
+					<td th:text=${order.ItemName} />
+					<td th:text=${order.itemQuantity} />
+					<td th:text=${order.itemDescription} />
+					<td th:text=${order.itemWeight} />
+
+					<td th:text=${order.userContact} />
+					<td th:text=${order.deliveryAddress} />
+					<td th:text=${order.zipCode} />
+					<td th:text=${order.totalCost} />
+					<td th:text=${order.orderStatus} />
+
+					<td th:if="'Admin User' == ${userRole}"><a  th:href="@{/ManageOrders/{userId}/EditOrderDetails/{id}(userId = ${userId}, id = ${order.aWBNumber})}">EDIT STATUS</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>

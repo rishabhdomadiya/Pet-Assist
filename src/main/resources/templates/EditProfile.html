@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<head>
+	    <title>Pet Assist|Log in </title>
+	</head>
+	<body>
+		<div class="row" style="text-align:center;background-color:powderblue;">
+			<div class="col-sm-2"><h4><a th:href="@{/home/{userId}(userId = ${userId})}">Home</a></h4></div>
+			<div class="col-sm-10"style="text-align:center;"><h4>Edit Profile</h4></div>
+		</div>
+		<div class ="row" style="text-align:center">
+			<form th:action="@{/EditProfile}" th:object="${EditProfile}" method="post">
+				<p th:if="${UserUpdate}" class="error">User Details updated successfull</p>
+				<p th:if="${UserNotUpdate}" class="error">User Details not updated successfull</p>
+				<p th:if="${EmailExist}" class="error">Email already exist</p>
+			    
+			    <label for="UserName">User Name:</label><br>
+			    <input type="text" id="UserName" name="UserName" autofocus="autofocus" required/><br><br>
+				
+				<label for="Email">Email</label><br>
+				<input type="email" id="Email" name="Email" th:field="*{Email}" autofocus="autofocus"/><br><br>
+				
+			    <label for="Password">Password:</label><br>
+			    <input type="Password" id="Password" name="Password" th:field="*{Password}" required/><br><br>
+			    
+			    <label for="Age">Age:</label><br>
+			    <input type="text" id="Age" name="Age" th:field="*{age}" autofocus="autofocus" required/><br><br>
+				
+				<label for="UserContact">Contact:</label><br>
+			    <input type="text" id="UserContact" name="UserContact" th:field="*{contact}" autofocus="autofocus" required/><br><br>
+				
+				<label for="Sex">Sex:</label><br>
+			    <input type="text" id="UserSex" name="UserSex" th:field="*{sex}" autofocus="autofocus" required/><br><br>
+				
+				<label for="DOB">DOB:</label><br>
+			    <input type="date" id="DOB" name="DOB" th:field="*{dob}" autofocus="autofocus" required/><br><br>
+			    
+			    <label for="UserAddress">Address:</label><br>
+			    <input type="text" id="UserAddress" name="UserAddress" th:field="*{address}" autofocus="autofocus" required/><br><br>
+				
+				
+			    </br>
+			    <input type="submit" value="Edit Profile"/>
+			</form>
+		</div>
+	</body>
+</html>

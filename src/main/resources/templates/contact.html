@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<head>
+    <title>Pet Assist|ContactUs </title>
+</head>
+<body>
+	<div class="row" style="text-align:center;background-color:powderblue;">
+		<div class="col-sm-2"><h4><a th:href="@{/home/{userId}(userId = ${userId})}">Home</a></h4></div>
+		<div class="col-sm-10"style="text-align:center;"><h4> Welcome to Pet Assist</h4></div>
+	</div>
+	<div class="container" style="text-align:center;" >
+	  <div class="col-sm-4"><h3>Facebook</h3><br><h4><a th:href="@{${contact.facebook}}">Visit us on Facebook</a></h4></div>
+	  <div class="col-sm-4"><h3>Instagram</h3><br><h4><a th:href="@{${contact.instagram}}">Visit us on Instagram</a></h4></div>
+	  <div class="col-sm-4"><h3>Twitter</h3><br><h4><a th:href="@{${contact.twitter}}">Visit us on Twitter</a></h4></div>
+	</div>
+	<br><br>
+	<div class="container" style="text-align:center;" >
+	  <div class="col-sm-4">
+		  <h3>Youtube</h3><br>
+		  <h4><a th:href="@{${contact.youtube}}">Visit us on Youtube</a></h4>
+	  </div>
+	  <div class="col-sm-4">
+	  		<h3>Email Address:</h3><br>
+	  		<h4 th:text="${contact.emailString}"></h4>
+	  </div>
+	  <div class="col-sm-4">
+	  		<h3>Mobile:</h3><br>
+	  		<h4 th:text="${contact.contactnumber}"></h4>
+	  </div>
+	</div>
+</body>
+</html>

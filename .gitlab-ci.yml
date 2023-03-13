@@ -1,0 +1,63 @@
+variables:
+  GIT_STRATEGY: clone
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+before_script:
+  - echo "Start of stage"
+
+image: maven:latest
+
+cache:
+  paths:
+    - .m2/repository
+    - target
+
+stages:         
+  - build
+  - test
+  - deploy
+
+Build:       
+  stage: build
+  tags:
+    - dalfcs_gitlab_docker_ci
+  script:
+    - echo "Compiling the code..."
+    - mvn clean
+    - mvn compile
+    - mvn package
+    - echo "Compile complete."
+  artifacts:
+    paths:
+      - target/*.jar
+
+Test:   
+  stage: test    
+  tags:
+    - dalfcs_gitlab_docker_ci
+  script:
+    - echo "Running unit tests... "
+    - mvn test
+    - echo "Test completed"
+  artifacts:
+    paths:
+        - "/target/surefire-reports/TEST-*.xml"
+    when: always
+    reports:
+      junit:
+        - "/target/surefire-reports/TEST-*.xml"
+
+Deploy:
+  stage: deploy
+  tags:
+    - dalfcs_gitlab_docker_ci
+  image: ruby:2.6
+  script:
+     - echo "Start of deploy"
+     - apt-get update -qy
+     - apt-get install -y ruby-dev
+     - gem install dpl
+     - dpl --provider=heroku --app=$HEROKU_PETASSIST_APP_NAME --api-key=$HEROKU_API_KEY
+
+after_script:
+  - echo "End of stage"

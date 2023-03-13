@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <head>
+      <title>Pet Assist| Edit Orders</title>
+   </head>
+   <body>
+      <div class="row" style="text-align:center;background-color:powderblue;">
+         <div class="col-sm-2">
+            <h4><a th:href="@{/home/{userId}(userId = ${userId})}">Home</a></h4>
+         </div>
+         <div class="col-sm-2" style="text-align:right;">
+            <h4><a th:href="@{/logout}">Log Out</a></h4>
+         </div>
+      </div>
+      <div class="container">
+         <div class="row">
+            <div class="col-sm-12">
+               <h3>Edit Orders</h3>
+            </div>
+         </div>
+         <hr>
+         <h4>Edit Details</h4>
+         <form th:action="@{/EditOrder/{userId}(userId = ${userId})}" th:object="${order}" method="post">
+            <div class="form-row">
+               <div class="form-group col-md-6">
+                  <label for="AWBNumber">AWBNumber (Order ID) </label><br>
+                  <input type="text" id="aWBNumber" name="aWBNumber" th:field="*{aWBNumber}" autofocus="autofocus"
+                     readonly required /><br><br>
+               </div>
+               <div class="form-group col-md-6">
+                  <label for="itemId">Item Id: </label><br>
+                  <input type="text" id="itemId" name="itemId" th:field=*{itemId} autofocus="autofocus" disabled
+                     required /><br><br>
+               </div>
+            </div>
+            <div class="form-row">
+               <div class="form-group col-md-6">
+                  <label for="userId">User Id: </label><br>
+                  <input type="text" id="userId" name="userId" th:field=*{userId} autofocus="autofocus" disabled
+                     required /><br><br>
+               </div>
+               <div class="form-group col-md-6">
+                  <label for="itemName">Item Name: </label><br>
+                  <input type="text" id="itemName" name="itemName" th:field=*{itemName} autofocus="autofocus" disabled
+                     required /><br><br>
+               </div>
+            </div>
+            <div class="form-row">
+               <div class="form-group col-md-6">
+                  <label for="itemQuantity">Item Quantity </label><br>
+                  <input type="text" id="itemQuantity" name="itemQuantity" th:field="*{itemQuantity}"
+                     autofocus="autofocus" required /><br><br>
+               </div>
+               <div class="form-group col-md-6">
+                  <label for="itemDescription">Item Description </label><br>
+                  <input type="text" id="itemDescription" name="itemDesc" th:field="*{itemDescription}"
+                     autofocus="autofocus" required /><br><br>
+               </div>
+            </div>
+            <div class="form-row">
+               <div class="form-group col-md-6">
+                  <label for="itemWeight">Item Weight </label><br>
+                  <input type="text" id="itemWeight" name="itemWeight" th:field="*{itemWeight}" autofocus="autofocus"
+                     required /><br><br>
+               </div>
+               <div class="form-group col-md-6">
+                  <label for="userContact">User Contact </label><br>
+                  <input type="text" id="userContact" name="userContact" th:field="*{userContact}"
+                     autofocus="autofocus" required /><br><br>
+               </div>
+            </div>
+            <div class="form-row">
+               <div class="form-group col-md-6">
+                  <label for="deliveryAddress">Delivery Address </label><br>
+                  <input type="text" id="deliveryAddress" name="deliveryAddress" th:field="*{deliveryAddress}"
+                     autofocus="autofocus" required /><br><br>
+               </div>
+               <div class="form-group col-md-6">
+                  <label for="zipCode">zipCode </label><br>
+                  <input type="text" id="zipCode" name="zipCode" th:field="*{zipCode}" autofocus="autofocus"
+                     required /><br><br>
+               </div>
+            </div>
+            <div class="form-row">
+               <div class="form-group col-md-6">
+                  <label for="totalCost">TotalCost: </label><br>
+                  <input type="text" id="totalCost" name="totalCost" th:field="*{totalCost}" autofocus="autofocus"
+                     required /><br><br>
+               </div>
+               <label for="orderStatus">orderStatus </label><br>
+               <input type="text" id="orderStatus" name="orderStatus" th:field="*{orderStatus}" autofocus="autofocus"
+                  required /><br><br>
+            </div>
+      </div>
+      <div class="form-group col-md-12 center">
+      <input class="btn-block" type="submit" value="Submit" size="100" />
+      </div>
+      </form>
+      </div>
+   </body>
+</html>

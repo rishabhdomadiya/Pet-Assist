@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<head>
+	    <title>Pet Assist|PetServices </title>
+	    <style>
+			.hideit {
+			  display : none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="row" style="text-align:center;background-color:powderblue;">
+		<div class="col-sm-2"><h4><a th:href="@{/home/{userId}(userId = ${userId})}">Home</a></h4></div>
+			<div class="col-sm-10"style="text-align:center;"><h4> Welcome to Pet Services</h4></div>
+		</div><br>
+		<div class="container" style="text-align:center;">
+			<form th:action="@{/PetServices/{userId}(userId = ${userId})}" th:object="${PetServices}" method="post" style="width:300px;margin:0 auto">
+			    <label for="cars">Animal category:</label><br>
+
+				<select name="animals" id="animals" th:field="*{animal}">
+				  <option value="Select an option">Select an option</option>
+				  <option value="Cat">Cat</option>
+				  <option value="Dog">Dog</option>
+				  <option value="Fish">Fish</option>
+				  <option value="Turtle">Turtle</option>
+				</select><br><br>
+
+			    <input type="submit" name="Submit" value="Submit" style="width: 180px;"/>
+
+				
+			</form>
+			<br><br>
+				<table th:if= "${PetSer}" class="table table-bordered table-striped" style="width:100%;" >
+				<tbody>
+					<tr>
+						<td th:each="PetS: ${PetSer}" style="width:50px;"> <h4 th:text=${PetS.animal}></h4> <br> 
+						<b>Grooming Tips:</b> <h5 th:text = ${PetS.groomServices}></h5><br>
+						<b>Nutritional Tips:</b> <h5 th:text = ${PetS.nutServices}></h5><br>
+						<b>Products Recommended:</b> <h5 th:text = ${PetS.prodServices}></h5><br>
+						  </td>
+						
+					</tr>
+				</tbody>
+				</table>
+				<table th:if= "${PetSerF}" class="table table-bordered table-striped" style="width:100%;" >
+				<tbody>
+					<tr >
+						<td style="width:50px;"><h2> <b th:text=${AnimalName}></b></h2></td><br> 
+						
+					</tr>
+					<tr >
+						<td style="width:50px;"> <b>Grooming Tips:</b></td><br> 
+						<td th:each="PetS: ${PetSerF}" style="width:50px;"><h5 th:text = ${PetS.groomServices}></h5></td>
+						
+					</tr>
+					<tr>
+						<td style="width:50px;"> <b>Nutritional Tips:</b></td><br>
+						<td th:each="PetS: ${PetSerF}" style="width:50px;"> <h5 th:text = ${PetS.nutServices}></h5>
+						  </td>
+						
+					</tr>
+					<tr>
+						<td style="width:50px;"> <b>Products Recommended:</b><br></td>
+						<td th:each="PetS: ${PetSerF}" style="width:50px;"> <h5 th:text = ${PetS.prodServices}></h5></td>
+						
+					</tr>
+					<tr>
+						<td style="width:50px;" colspan="3"> <b>If interested in buying following product kindly click the button</b>  <a th:href="@{/pet-items/{userId}(userId = ${userId})}">    Purchase Product</a><br>
+						</td>
+					</tr>
+				</tbody>
+				</table>	
+		</div>
+	</body>
+</html>

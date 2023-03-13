@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<head>
+    <title>Pet Assist|Home </title>
+</head>
+<body>
+	<div class="row" style="text-align:center;background-color:powderblue;">
+		<div class="col-sm-8"><h4> Welcome to Pet Assist <input type="hidden" th:value="${userId}"/></h4></div>
+		<div class="col-sm-1" style="text-align:right;width:9%"><h4><a th:href="@{/contact/{userId}(userId = ${userId})}">Contact Us</a></h4></div>
+		<div class="col-sm-1" style="text-align:right;width:9%"><h4><a th:href="@{/EditProfile/{userId}(userId = ${userId})}">Edit Profile</a></h4></div>
+		<div class="col-sm-1" style="font-size:17px;width:9%"><h4><a th:href="@{/logout}">Log Out</a></h4></div>
+	</div>
+
+
+	<div class="row" align="center">
+	  <span th:if="${isCustomer}"><div class="col-sm-2"><a th:href="@{/viewpets/{userId}(userId = ${userId})}">Adopt a Pet</a></div></span>
+	  <div class="col-sm-2"><a th:href="@{/store/{userId}(userId = ${userId})}">Find a store</a></div>
+		<span th:if="${isCustomer}"><div class="col-sm-2"><a th:href="@{/my-pets/{userId}(userId = ${userId})}">My pets</a></div></span>
+		<span th:if="${isCustomer}"><div class="col-sm-2"><a th:href="@{/pet-items/{userId}(userId = ${userId})}">Place an Order</a></div></span>
+
+		<span th:if="${!isCustomer}"><div class="col-sm-2"><a th:href="@{/petRequests/{userId}(userId = ${userId})}">Pet Requests</a></div></span>
+	  <div class="col-sm-2"><a th:href="@{/ManageOrders/{userId}(userId = ${userId})}">Manage orders</a></div>
+
+	  <div class="col-sm-2"><a th:href="@{/PetServices/{userId}(userId = ${userId})}">Pet Services</a></div>
+	</div>
+
+</body>
+</html>

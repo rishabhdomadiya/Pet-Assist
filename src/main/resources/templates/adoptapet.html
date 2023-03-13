@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	
+
+	<head>
+	    <title>Pet Assist|Adopt a pet </title>
+	</head>
+	<body>
+		<div class="row" style="text-align:center;background-color:powderblue;">
+			<div class="col-sm-2"><h4><a th:href="@{/home/{userId}(userId = ${userId})}">Home</a></h4></div>
+			<div class="col-sm-8" style="text-align:center;"><h4>Adoption Form <input type="hidden"th:value="${petParent}"/></h4></div>
+			<div class="col-sm-2" style="text-align:right;"><h4><a th:href="@{/logout}">Log Out</a></h4></div>
+			
+		</div>
+		<hr>
+		
+		<div class="container">
+			<div class="col-sm-3">
+				<h4>Pet Information </h4>
+				<table class="table table-bordered table-striped" style="width:100%">
+					<tbody>
+						<!-- <tr>
+							<td th:text=${id} />
+						</tr> -->
+						<tr th:each="petListById: ${petListById}">
+							<td th:text=${petListById.animal} />
+						</tr>
+						<tr th:each="petListById: ${petListById}">
+							<td th:text=${petListById.breed} />
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class ="col-sm-3"></div>
+			<div class ="col-sm-6" >
+				<h4>Please fill the adoption form </h4>
+				<form th:action="@{/adoptapet}" th:object="${petAdoptionForm}" method="post" >
+					
+				    <label for="petParent">Pet Parent: </label><br>
+				    <input type="text" id="petParent" name="petParent" th:value=${user} autofocus="autofocus" required/><br><br>
+				    
+				    <label for="emailId">Email Id: </label><br>
+				    <input type="text" id="emailId" name="emailId" th:value=${email} pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" autofocus="autofocus" requiredoninvalid="this.setCustomValidity('Enter correct email-id')"
+  					oninput="this.setCustomValidity('')"/><br><br>
+				    
+				    <label for="contact">Contact: </label><br>
+				    <input type="tel" id="contact" name="contact" field="*{contact}" pattern="[0-9]{10}" autofocus="autofocus"required oninvalid="this.setCustomValidity('Enter 10 digit number')"
+  					oninput="this.setCustomValidity('')"/><br><br>
+				    
+				    <label for="address">Address: </label><br>
+				    <input type="text" id="address" name="address" field="*{address}" autofocus="autofocus"required/><br><br>
+				    
+				    <label for="reason">Why are you the best fit?: </label><br>
+				    <input type="text" id="reason" name="reason" field="*{reason}" autofocus="autofocus" required/><br><br>
+				    
+				    <input type="hidden" id="petId" name="petId" th:value=${id} autofocus="autofocus" />
+				    <input type="hidden" id="userId" name="userId" th:value=${userId} autofocus="autofocus" required/>
+					
+				    
+				    <input type="submit" value="Submit" style="width: 180px;"/>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

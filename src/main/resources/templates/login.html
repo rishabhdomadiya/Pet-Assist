@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<head>
+	    <title>Pet Assist|Log in </title>
+	</head>
+	<body>
+		<div class="row" style="text-align:center;background-color:powderblue;">
+			<h4> Log in form</h4>
+		</div>
+		<div class ="row" style="text-align:center">
+			<form th:action="@{/login}" th:object="${login}" method="post" style="width:300px;margin:0 auto">
+			    <p th:if="${invalidCredentials}" class="error">Username or Password is wrong</p>
+			    <p th:if="${PassUpdated}" class="error">User password updated</p>
+			    <label for="UserName">User Name:</label><br>
+			    <input type="text" id="UserName" name="UserName" autofocus="autofocus" required/><br><br>
+			
+			    <label for="Password">Password:</label><br>
+			    <input type="Password" id="Password" name="Password" required/><br><br>
+
+			    <input type="submit" name="Login" value="Log in" style="width: 180px;"/><br>
+
+			    <input type="submit" name="Forget Password" value="Forget Password" style="width: 180px;"/>
+
+			</form>
+		</div>
+	</body>
+</html>
